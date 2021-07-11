@@ -1,8 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <iostream>
-#include <vector>
-#include <QString>
 using namespace std;
 class Node {
 public:
@@ -22,6 +20,34 @@ public:
 
 };
 
+
+void MainWindow:: parse_xml(vector<xml_parse> &xml , string line, int& line_number) {
+    xml_parse temp;
+    int new_i = 0;
+
+    for (int i = 0; i < line.length(); i++) {
+        if (line[i] == '<') {
+            new_i = line.find('>', i);
+            temp = { line.substr(i, new_i + 1 - i), line_number };
+            xml.push_back(temp);
+            i = new_i - 1;
+        }
+        else if (line[i] == '>' && i != line.length() - 1 && line[i + 1] != '<') {
+            new_i = line.find('<', i);
+            temp = { line.substr(i + 1, line.length() - i), line_number };
+            if (new_i == -1) {
+                xml.push_back(temp);
+                i = line.length();
+            }
+            else {
+                temp = { line.substr(i + 1, new_i - 1 - i), line_number };
+                xml.push_back(temp);
+                i = new_i - 1;
+            }
+        }
+    }
+    line_number++;
+}
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
