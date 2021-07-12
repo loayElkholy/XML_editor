@@ -401,6 +401,55 @@ void MainWindow::parse_xml(vector<xml_parse> &xml , string line, int& line_numbe
         line_number++;
 }
 
+vector<int> compress_file(map<string, int> &table, string s1, int &mul_char_code) {
+    vector<int> encoded_code;
+    string current = "", next = "";
+    current += s1[0];
+    for (int i = 0; i < s1.length(); i++) {
+        if (i != s1.length() - 1) {
+            next += s1[i + 1];
+        }
+        if (table.find(current + next) != table.end()) {
+            current = current + next;
+        }
+        else {
+            encoded_code.push_back(table[current]);
+            table[current + next] = mul_char_code;
+            mul_char_code++;
+            current = next;
+        }
+        next = "";
+    }
+    encoded_code.push_back(table[current]);
+    return encoded_code;
+}
+
+void decode(map<int, string> table_decode, vector<int> encoded_code) {
+    string s;
+    for (int i = 0; i < encoded_code.size(); i++) {
+        s += table_decode[encoded_code[i]];
+    }
+    cout << s;
+}
+
+//********************************************** should be placed in button of compressing *********************************
+int mul_char_code = 256;
+vector<int> code;
+vector<int> total_code;
+map<string, int> table;
+for (int i = 0; i <= 255; i++) {
+    string character = "";
+    character += char(i);
+    table[character] = i;
+}
+
+map<int, string> table_decode;
+map<string, int>::iterator itr;
+for (itr = table.begin(); itr != table.end(); itr++) {
+    table_decode[itr->second] = itr->first;
+}
+//****************************************************************************************************************************
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
