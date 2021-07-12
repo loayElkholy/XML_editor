@@ -6,25 +6,191 @@
 #include<algorithm>
 
 
-
 using namespace std;
+
+typedef struct {
+    string name;
+    vector<pair<string, string>> attr;
+}tag;
+
 class Node {
 public:
     string name;
     string value;
     string attribute;
     bool is_self_closing;
+    bool found;
     Node* parent;
     vector <Node*> children;
-    Node(string name) : name{ name }, value{ "\0" }, attribute{ "\0" }, is_self_closing{false}, children{}, parent{ nullptr }{}
+    Node(string name) : name{ name },found{false}, value{ "\0" }, attribute{ "\0" }, is_self_closing{false}, children{}, parent{ nullptr }{}
 };
 
 class Tree
 {
     Node* root;
     Node* add;
+    int depth = 0;
 
+    tag get_tag_struct(string s1 ,string name)
+       {
+           tag t;
+           string s = "<"+ s1 + " " + name;
+           string tmp = "";
+           for (int i = 1;; i++)
+           {
+               if (s[i] == ' ' || i == s.length() - 1)
+               {
+                   t.name = tmp;
+                   break;
+               }
+               else
+               {
+                   tmp += s[i];
+               }
+           }
+           int sp = -1, eq = -1;
+
+           while (1)
+           {
+               if(sp==-1)
+                   sp = s.find(' ', sp + 1)-1;
+               else
+                   sp = s.find("\" ", sp + 1);
+               eq = s.find('=', eq + 1);
+               if (sp == string::npos)return t;
+               pair<string, string> p;
+               p.first = s.substr(sp + 2, eq - 1 - sp);
+               p.second = s.substr(eq + 1, s.find('\"', eq + 2) - eq);
+               t.attr.push_back(p);
+           }
+
+       }
+       void find(Node * r,int ind ,vector<int> &index)
+       {
+           index = {};
+           index.push_back(ind);
+           for (int i = ind+1; i < r->children.size(); i++)
+           {
+               if (r->children[i]->name == r->children[ind]->name)
+               {
+                   index.push_back(i);
+                   r->children[i]->found = true;
+               }
+           }
+       }
+       void ind()
+       {
+           for (int i = 0; i < depth; i++)cout << "   ";
+       }
+       void print_attr(vector<pair<string, string>>s)
+       {
+           for (int i = 0; i <s.size(); i++)
+           {
+               if (i) { cout << ",\n"; }
+               ind(); cout<<"\"@"<<s[i].first <<"\": "<<s[i].second;
+           }
+       }
+       void Pjson(Node* r ,bool flag=true)
+       {
+           tag t = get_tag_struct(r->name ,r->attribute);
+           if (r->children.size() == 0)
+           {
+               if(flag){ind(); cout << "\"" << t.name << "\": ";}
+               if(t.attr[0].first != ""){
+                   if (!flag)ind();
+                   cout << "{" << endl;
+                   depth++;
+                   print_attr(t.attr);
+                   cout << ",\n";
+                   if (r->value != "") { ind(); cout << "\"#text" << ": " << '"' << r->value << "\"\n"; }
+                   depth--; ind(); cout << "}";
+               }
+               else
+               {
+                  cout << '"' << r->value << '"';
+               }
+               return;
+           }
+           else
+           {
+               vector<int>index;
+               if (r->children.size() > 1)
+               {
+                   if (flag) { ind(); cout << '"' << t.name << "\": {\n"; depth++; }
+                   if (t.attr[0].first != "") {
+                       print_attr(t.attr);
+                       cout << ",\n";
+                   }
+                   for (int i = 0; i < r->children.size(); i++)
+                   {
+                       if (r->children[i]->found)
+                       {
+                           continue;
+                       }
+                       if (i) {cout << ",\n"; }
+                       find(r, i, index);
+                       if (index.size() > 1)
+                       {
+                           Node* ch = r->children[i];
+                           ind(); cout << "\"" << ch->name << "\": [\n"; depth++;
+                           if (ch->children.size()==0 && ch->attribute=="")
+                           {
+                               for (int x = 0; x < index.size(); x++)
+                               {
+                                   if (x) { cout << ",\n"; }
+                                   ind(); cout << r->children[index[x]]->value;
+                               }
+                           }
+                           else {
+                                   for (int x = 0; x < index.size(); x++)
+                                   {
+                                       if (x) { cout << ",\n"; }
+                                       if (r->children[index[x]]->children.size()) {
+                                           ind(); cout << "{\n"; depth++;
+                                           Pjson(r->children[index[x]], false);
+                                           depth--;  cout << "\n"; ind(); cout << "}";
+                                       }
+                                       else
+                                       {
+                                           Pjson(r->children[index[x]], false);
+                                       }
+                                   }
+
+                           }
+                           depth--;  cout << "\n"; ind(); cout << "]";
+                       }
+                       else
+                       {
+                           Pjson(r->children[i]);
+                       }
+                   }
+               }
+               else
+               {
+                   ind(); cout<< '"' << t.name << '"' << ": {\n"; depth++;
+                   if (t.attr[0].first!="") {
+                       print_attr(t.attr);
+                       cout << ",\n";
+                   }
+                   for (int i = 0; i < r->children.size(); i++)
+                   {
+                       if (i) { ind(); cout << ",\n"; }
+                       Pjson(r->children[i]);
+                   }
+                   depth--;  cout << "\n"; ind(); cout << "}";
+               }
+
+           }
+
+       }
 public:
+       void json()
+       {
+           cout << '{' << endl;
+           depth++;
+           Pjson(root);
+           cout << "\n}";
+       }
     vector<int> vector_to_tree(vector<xml_parse> v) {
         string s ;
         int space;
