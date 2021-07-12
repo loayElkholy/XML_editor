@@ -133,6 +133,50 @@ public:
     Node* get_root() {
         return root;
     }
+
+    void format(Node* root, int count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                cout << "   ";
+            }
+            cout << "<" << root->name;
+            if (root->attribute.length() != 0)
+            {
+                cout << " " << root->attribute;
+            }
+            if (root->is_self_closing) {
+                cout<< '/';
+            }
+            cout << ">";
+            if (root->value == "" && !root->is_self_closing)
+            {
+                count++;
+                cout << endl;
+            }
+            else
+            {
+                if (!root->is_self_closing) {
+                    cout << root->value; cout << "</" << root->name << ">\n";
+                }
+                else {
+                    cout << "\n";
+                }
+                return;
+            }
+            for (int i = 0; i < root->children.size(); i++)
+            {
+                    format(root->children[i], count);
+            }
+            count--;
+            for (int i = 0; i < count; i++)
+            {
+                cout << "   ";
+            }
+
+            cout << "</" << root->name << ">";
+            cout << endl;
+    }
 };
 
 
