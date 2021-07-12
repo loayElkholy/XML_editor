@@ -12,6 +12,7 @@ struct xml_parse {
     int line_no;
 };
 
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
