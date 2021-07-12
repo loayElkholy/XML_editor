@@ -183,7 +183,6 @@ public:
 void MainWindow::parse_xml(vector<xml_parse> &xml , string line, int& line_number) {
     xml_parse temp;
     int new_i = 0;
-
     for (int i = 0; i < line.length(); i++) {
         if (line[i] == '<' && (line[i + 1] != '!' && line[i + 1] != '?')) {
             new_i = line.find('>', i);
@@ -196,8 +195,16 @@ void MainWindow::parse_xml(vector<xml_parse> &xml , string line, int& line_numbe
             temp = { line.substr(i + 1, line.length() - i), line_number };
             for (int j = 0; j < temp.xml_parsed.length(); j++) {
                 if (temp.xml_parsed[j] == ' ') {
-                    temp.xml_parsed.erase(j, 1);
-                    j--;
+                    if (temp.xml_parsed[j] == ' ') {
+                        if (j == 0) {
+                            temp.xml_parsed.erase(j, 1);
+                            j--;
+                        }
+                        else if (j == temp.xml_parsed.length() - 1) {
+                            temp.xml_parsed.erase(j, 1);
+                            j = temp.xml_parsed.length() - 2;
+                        }
+                    }
                 }
             }
             if (new_i == -1 && !temp.xml_parsed.empty()) {
@@ -208,8 +215,14 @@ void MainWindow::parse_xml(vector<xml_parse> &xml , string line, int& line_numbe
                 temp = { line.substr(i + 1, new_i - 1 - i), line_number };
                 for (int j = 0; j < temp.xml_parsed.length(); j++) {
                     if (temp.xml_parsed[j] == ' ') {
-                        temp.xml_parsed.erase(j, 1);
-                        j--;
+                        if (j == 0) {
+                            temp.xml_parsed.erase(j, 1);
+                            j--;
+                        }
+                        else if (j == temp.xml_parsed.length() - 1) {
+                            temp.xml_parsed.erase(j, 1);
+                            j = temp.xml_parsed.length() - 2;
+                        }
                     }
                 }
                 if (!temp.xml_parsed.empty()) {
@@ -219,7 +232,7 @@ void MainWindow::parse_xml(vector<xml_parse> &xml , string line, int& line_numbe
             }
         }
     }
-    line_number++;
+        line_number++;
 }
 
 MainWindow::MainWindow(QWidget *parent)
