@@ -7,13 +7,11 @@
 #include <QPushButton>
 #include <QTextBrowser>
 #include<QTabWidget>
+#include "tree.h"
+
 using namespace std;
 
-struct xml_parse {
-    string xml_parsed;
-    int line_no;
-};
-
+Tree XML_tree;
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
