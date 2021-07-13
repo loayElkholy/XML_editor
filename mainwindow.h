@@ -27,8 +27,11 @@ public:
     ~MainWindow();
     void connect_fun();
     void parse_xml(vector<xml_parse> &xml, string line, int &line_number);
+
 private slots:
     void on_push_button_clicked();
+    void on_tabWidget_tabCloseRequested(int index);
+
 private:
     Ui::MainWindow *ui;
     QPushButton *pushButton;

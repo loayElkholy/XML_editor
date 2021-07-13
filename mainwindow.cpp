@@ -167,6 +167,7 @@ MainWindow::MainWindow(QWidget *parent)
     vertical_layout->addLayout(horizontal_layout);
     vertical_layout->addWidget(textBrowser);
 
+    tabWidget->setTabsClosable(true);
 
     connect_fun();
     main_layout->addLayout(vertical_layout);
@@ -178,11 +179,12 @@ MainWindow::MainWindow(QWidget *parent)
 void MainWindow::connect_fun()
 {
     connect(pushButton,SIGNAL(clicked()),this,SLOT(on_push_button_clicked()));
+    connect(tabWidget, SIGNAL(tabCloseRequested(int)), this, SLOT(on_tabWidget_tabCloseRequested(int)));
 }
 void MainWindow::on_push_button_clicked()
 {
     QString filter = "All Files (*.*) ;; Text Files (*.txt) ;; XML Files (*.xml)";
-    QString file_name = QFileDialog::getOpenFileName(this,"choose file","D:\\loay\\College\\3rd year\\2nd term\\datastructure and algorithm",filter);
+    QString file_name = QFileDialog::getOpenFileName(this,"choose file","C:\\",filter);
 
     QFile file(file_name);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -199,6 +201,11 @@ void MainWindow::on_push_button_clicked()
         textBrowser->setText(text);
     file.close();
 }
+
+void MainWindow::on_tabWidget_tabCloseRequested(int index){
+    tabWidget->removeTab(index);
+}
+
 MainWindow::~MainWindow()
 {
     delete ui;
