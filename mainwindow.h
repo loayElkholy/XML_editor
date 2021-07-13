@@ -4,7 +4,8 @@
 #include <QMainWindow>
 #include <vector>
 #include <QString>
-
+#include <QPushButton>
+#include <QTextBrowser>
 using namespace std;
 
 struct xml_parse {
@@ -24,9 +25,13 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void connect_fun();
     void parse_xml(vector<xml_parse> &xml, string line, int &line_number);
-
+private slots:
+    void on_push_button_clicked();
 private:
     Ui::MainWindow *ui;
+    QPushButton *pushButton;
+    QTextBrowser *textBrowser;
 };
 #endif // MAINWINDOW_H

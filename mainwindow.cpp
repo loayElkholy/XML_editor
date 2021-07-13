@@ -4,7 +4,10 @@
 #include<string>
 #include<string.h>
 #include<algorithm>
-
+#include <QtWidgets>
+#include <QTextStream>
+#include <QFile>
+#include <QFileDialog>
 
 using namespace std;
 
@@ -164,6 +167,7 @@ class Tree
                            Pjson(r->children[i]);
                        }
                    }
+                   if (flag) { depth--;  cout << "\n"; ind(); cout << "}"; }
                }
                else
                {
@@ -433,21 +437,21 @@ void decode(map<int, string> table_decode, vector<int> encoded_code) {
 }
 
 //********************************************** should be placed in button of compressing *********************************
-int mul_char_code = 256;
-vector<int> code;
-vector<int> total_code;
-map<string, int> table;
-for (int i = 0; i <= 255; i++) {
-    string character = "";
-    character += char(i);
-    table[character] = i;
-}
+//int mul_char_code = 256;
+//vector<int> code;
+//vector<int> total_code;
+//map<string, int> table;
+//for (int i = 0; i <= 255; i++) {
+//    string character = "";
+//    character += char(i);
+//    table[character] = i;
+//}
 
-map<int, string> table_decode;
-map<string, int>::iterator itr;
-for (itr = table.begin(); itr != table.end(); itr++) {
-    table_decode[itr->second] = itr->first;
-}
+//map<int, string> table_decode;
+//map<string, int>::iterator itr;
+//for (itr = table.begin(); itr != table.end(); itr++) {
+//    table_decode[itr->second] = itr->first;
+//}
 //****************************************************************************************************************************
 
 MainWindow::MainWindow(QWidget *parent)
@@ -455,10 +459,74 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-}
+    QWidget *widget= new QWidget() ;
+    QHBoxLayout *main_layout =new QHBoxLayout();
+    QVBoxLayout *vertical_layout =new QVBoxLayout();
 
+    pushButton =new QPushButton();
+    pushButton->setText("open file");
+
+    textBrowser =new QTextBrowser();
+
+    vertical_layout->addWidget(textBrowser);
+    vertical_layout->addWidget(pushButton);
+
+    connect_fun();
+    main_layout->addLayout(vertical_layout);
+    widget->setLayout(main_layout);
+    setCentralWidget(widget);
+
+}
+void MainWindow::connect_fun()
+{
+    connect(pushButton,SIGNAL(clicked()),this,SLOT(on_push_button_clicked()));
+}
+void MainWindow::on_push_button_clicked()
+{
+    QString filter = "All Files (*.*) ;; Text Files (*.txt) ;; XML Files (*.xml)";
+    QString file_name = QFileDialog::getOpenFileName(this,"choose file","D:\\loay\\College\\3rd year\\2nd term\\datastructure and algorithm",filter);
+
+    QFile file(file_name);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+        return;
+    QTextStream in(&file);
+        QString text;
+        while (!in.atEnd()) {
+            QString line = in.readLine();
+            text.append(line+"\n");
+            string line_string = line.toStdString();
+            qDebug() << QString::fromStdString(line_string);
+        }
+
+        textBrowser->setText(text);
+    file.close();
+}
 MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
