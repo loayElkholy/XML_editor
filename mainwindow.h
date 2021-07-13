@@ -11,7 +11,8 @@
 
 using namespace std;
 
-Tree XML_tree;
+
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

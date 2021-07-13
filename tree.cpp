@@ -4,7 +4,7 @@ void Tree::json()
 {
     cout << '{' << endl;
     depth++;
-    Pjson(root);
+    Pjson(root,true);
     cout << "\n}";
 }
 vector<int> Tree::vector_to_tree(vector<xml_parse> v) {

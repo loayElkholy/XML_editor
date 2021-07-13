@@ -13,6 +13,8 @@
 
 using namespace std;
 
+Tree XML_Tree ;
+
 void MainWindow::parse_xml(vector<xml_parse> &xml , string line, int& line_number) {
     xml_parse temp;
     int new_i = 0;
@@ -126,15 +128,15 @@ MainWindow::MainWindow(QWidget *parent)
     QHBoxLayout *main_layout =new QHBoxLayout();
     QVBoxLayout *vertical_layout =new QVBoxLayout();
     QHBoxLayout *horizontal_layout = new QHBoxLayout();
-    QPixmap pixmap(":\\rec\\C:\\Users\\lina\\Desktop\\Custom-Icon-Design-Pretty-Office-9-Open-file.ico");
+    QPixmap pixmap(":\\rec\\icons\\Custom-Icon-Design-Pretty-Office-9-Open-file.ico");
     QIcon ButtonIcon(pixmap);
-    QPixmap pixmap_2(":\\rec\\C:\\Users\\lina\\Desktop\\format.ico");
+    QPixmap pixmap_2(":\\rec\\icons\\format.ico");
     QIcon ButtonIcon_2(pixmap_2);
-    QPixmap pixmap_3(":\\rec\\C:\\Users\\lina\\Desktop\\json-icon-png-18.jpg");
+    QPixmap pixmap_3(":\\rec\\icons\\json-icon-png-18.jpg");
     QIcon ButtonIcon_3(pixmap_3);
-    QPixmap pixmap_4(":\\rec\\C:\\Users\\lina\\Desktop\\minify");
+    QPixmap pixmap_4(":\\rec\\icons\\minify");
     QIcon ButtonIcon_4(pixmap_4);
-    QPixmap pixmap_5(":\\rec\\C:\\Users\\lina\\Desktop\\compress.png");
+    QPixmap pixmap_5(":\\rec\\icons\\compress.png");
     QIcon ButtonIcon_5(pixmap_5);
 
 
@@ -201,7 +203,6 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
-
 
 
 

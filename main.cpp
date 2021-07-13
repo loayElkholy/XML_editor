@@ -2,6 +2,8 @@
 
 #include <QApplication>
 
+extern Tree XML_Tree ;
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
