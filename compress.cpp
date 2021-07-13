@@ -4,7 +4,10 @@
 #include <QIcon>
 #include <QPixmap>
 
-
+int mul_char_code = 256;
+vector<int> code;
+//vector<int> total_code;
+map<string, int> encoded_table;
 
 Compress::Compress(QWidget *parent) :
     QWidget(parent),
@@ -38,11 +41,11 @@ Compress::Compress(QWidget *parent) :
     for (int i = 0; i <= 255; i++) {
         string character = "";
         character += char(i);
-        table[character] = i;
+        encoded_table[character] = i;
     }
     string s1;
     QString text_encoded;
-    code = compress_file(table, s1, mul_char_code);
+    code = compress_file(encoded_table, s1, mul_char_code);
     for (int i = 0; i < code.size(); i++) {
         text_encoded += QString::number(code[i]);
     }
@@ -56,7 +59,7 @@ void Compress::connect_tab_fn() {
 void Compress::on_pushButton_2_clicked() {
     map<int, string> table_decode;
     map<string, int>::iterator itr;
-    for (itr = table.begin(); itr != table.end(); itr++) {
+    for (itr = encoded_table.begin(); itr != encoded_table.end(); itr++) {
         table_decode[itr->second] = itr->first;
     }
     decode(table_decode, code);

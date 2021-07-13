@@ -6,11 +6,6 @@
 #include <QTextBrowser>
 #include <QPushButton>
 
-int mul_char_code = 256;
-vector<int> code;
-//vector<int> total_code;
-map<string, int> table;
-
 namespace Ui {
 class Compress;
 }
