@@ -8,6 +8,8 @@
 #include <QTextStream>
 #include <QFile>
 #include <QFileDialog>
+#include<QIcon>
+#include<QPixmap>
 
 using namespace std;
 
@@ -271,25 +273,14 @@ public:
 
         *no_space += '<' + (root_ptr->name);
         if (root_ptr->attribute != "\0") {
-            for (int i=0;i< (root_ptr->attribute).length();i++){
-                if((root_ptr->attribute)[i] !=' '){
-                    temp += (root_ptr->attribute)[i];
-                }
-            }
-            *no_space += temp;
+          *no_space += root_ptr->attribute;
         }
         if (root_ptr->is_self_closing) {
             *no_space += '/';
         }
         *no_space += '>';
         if (root_ptr->value != "\0") {
-            temp = "\0";
-            for (int i=0;i< (root_ptr->value).length();i++){
-                if((root_ptr->value)[i] !=' '){
-                    temp += (root_ptr->value)[i];
-                }
-            }
-            *no_space += temp;
+         *no_space += root_ptr->value;
         }
         for (int i = 0; i < (root_ptr->children.size()); i++) {
             print(root_ptr->children[i],no_space);
@@ -462,19 +453,52 @@ MainWindow::MainWindow(QWidget *parent)
     QWidget *widget= new QWidget() ;
     QHBoxLayout *main_layout =new QHBoxLayout();
     QVBoxLayout *vertical_layout =new QVBoxLayout();
+    QHBoxLayout *horizontal_layout = new QHBoxLayout();
+    QPixmap pixmap(":\\rec\\C:\\Users\\lina\\Desktop\\Custom-Icon-Design-Pretty-Office-9-Open-file.ico");
+    QIcon ButtonIcon(pixmap);
+    QPixmap pixmap_2(":\\rec\\C:\\Users\\lina\\Desktop\\format.ico");
+    QIcon ButtonIcon_2(pixmap_2);
+    QPixmap pixmap_3(":\\rec\\C:\\Users\\lina\\Desktop\\json-icon-png-18.jpg");
+    QIcon ButtonIcon_3(pixmap_3);
+    QPixmap pixmap_4(":\\rec\\C:\\Users\\lina\\Desktop\\minify");
+    QIcon ButtonIcon_4(pixmap_4);
+    QPixmap pixmap_5(":\\rec\\C:\\Users\\lina\\Desktop\\compress.png");
+    QIcon ButtonIcon_5(pixmap_5);
+
+
+
 
     pushButton =new QPushButton();
-    pushButton->setText("open file");
+    pushButton->setText("Open file");
+    pushButton ->setIcon(ButtonIcon);
+    pushButton_2->setText("Format");
+    pushButton_2 ->setIcon(ButtonIcon_2);
+    pushButton_3->setText("Convert to Json");
+    pushButton_3 ->setIcon(ButtonIcon_3);
+    pushButton_4->setText("Minify");
+    pushButton_4 ->setIcon(ButtonIcon_4);
+    pushButton_5->setText("Compress");
+    pushButton_5 ->setIcon(ButtonIcon_5);
+
+
+
 
     textBrowser =new QTextBrowser();
 
+    horizontal_layout ->addWidget(pushButton);
+    horizontal_layout ->addWidget(pushButton_2);
+    horizontal_layout ->addWidget(pushButton_3);
+    horizontal_layout ->addWidget(pushButton_4);
+    horizontal_layout ->addWidget(pushButton_5);
+    vertical_layout->addLayout(horizontal_layout);
     vertical_layout->addWidget(textBrowser);
-    vertical_layout->addWidget(pushButton);
+
 
     connect_fun();
     main_layout->addLayout(vertical_layout);
     widget->setLayout(main_layout);
-    setCentralWidget(widget);
+    tabWidget ->addTab(widget,"input file");
+    setCentralWidget(tabWidget);
 
 }
 void MainWindow::connect_fun()

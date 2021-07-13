@@ -6,6 +6,7 @@
 #include <QString>
 #include <QPushButton>
 #include <QTextBrowser>
+#include<QTabWidget>
 using namespace std;
 
 struct xml_parse {
@@ -32,6 +33,12 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QPushButton *pushButton;
+    QPushButton *pushButton_2 = new QPushButton;
+    QPushButton *pushButton_3 = new QPushButton;
+    QPushButton *pushButton_4 = new QPushButton;
+    QPushButton *pushButton_5 = new QPushButton;
     QTextBrowser *textBrowser;
+    QTabWidget *tabWidget = new QTabWidget;
+
 };
 #endif // MAINWINDOW_H

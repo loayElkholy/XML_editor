@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/rec">
+        <file>C:/Users/lina/Desktop/Custom-Icon-Design-Pretty-Office-9-Open-file.ico</file>
+        <file>C:/Users/lina/Desktop/Custom-Icon-Design-Pretty-Office-7-Save.ico</file>
+        <file>C:/Users/lina/Desktop/json-icon-png-18.jpg</file>
+        <file>C:/Users/lina/Desktop/format.ico</file>
+        <file>C:/Users/lina/Desktop/minify</file>
+        <file>C:/Users/lina/Desktop/compress.png</file>
+    </qresource>
+</RCC>

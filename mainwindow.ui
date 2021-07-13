@@ -25,7 +25,21 @@
    </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionOpen">
+   <property name="icon">
+    <iconset resource="icon.qrc">
+     <normaloff>:/rec/C:/Users/lina/Desktop/Custom-Icon-Design-Pretty-Office-9-Open-file.ico</normaloff>:/rec/C:/Users/lina/Desktop/Custom-Icon-Design-Pretty-Office-9-Open-file.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Open</string>
+   </property>
+   <property name="toolTip">
+    <string>open file</string>
+   </property>
+  </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="icon.qrc"/>
+ </resources>
  <connections/>
 </ui>
