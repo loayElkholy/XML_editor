@@ -1,0 +1,39 @@
+#ifndef COMPRESS_H
+#define COMPRESS_H
+
+#include <QWidget>
+#include "mainwindow.h"
+#include <QTextBrowser>
+#include <QPushButton>
+
+int mul_char_code = 256;
+vector<int> code;
+//vector<int> total_code;
+map<string, int> table;
+
+namespace Ui {
+class Compress;
+}
+
+class Compress : public QWidget
+{
+    Q_OBJECT
+
+public:
+    explicit Compress(QWidget *parent = nullptr);
+    ~Compress();
+    void connect_tab_fn();
+    vector<int> compress_file(map<string, int> &table, string s1, int &mul_char_code);
+    void decode(map<int, string> table_decode, vector<int> encoded_code);
+
+private slots:
+    void on_pushButton_2_clicked();
+
+private:
+    Ui::Compress *ui;
+    QTextBrowser *textBrowser = new QTextBrowser;
+    QPushButton *pushButton = new QPushButton;
+    QPushButton *pushButton_2 = new QPushButton;
+};
+
+#endif // COMPRESS_H

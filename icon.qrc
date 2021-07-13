@@ -6,5 +6,6 @@
         <file>icons/format.ico</file>
         <file>icons/json-icon-png-18.jpg</file>
         <file>icons/minify</file>
+        <file>icons/decompress.png</file>
     </qresource>
 </RCC>
