@@ -42,7 +42,7 @@ vector<int> Tree::vector_to_tree(vector<xml_parse> v) {
          }
          else {
              if (add->value != "\0") {
-                 error.push_back((v[i].line_no));
+                 error.push_back((v[i].line_no)-1);
                  add = add->parent;
              }
              space = v[i].xml_parsed.find(' ');

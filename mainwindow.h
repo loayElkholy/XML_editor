@@ -44,6 +44,7 @@ private:
     QPushButton *pushButton_3 = new QPushButton;
     QPushButton *pushButton_4 = new QPushButton;
     QPushButton *pushButton_5 = new QPushButton;
-    QTextBrowser *textBrowser;
+    //QTextBrowser *textBrowser;
+    QTextEdit *textEdit = new QTextEdit ;
 };
 #endif // MAINWINDOW_H

@@ -12,6 +12,7 @@
 #include <QFileDialog>
 #include<QIcon>
 #include<QPixmap>
+#include<QTextEdit>
 
 
 #include "json.h"
@@ -111,11 +112,12 @@ MainWindow::MainWindow(QWidget *parent)
     pushButton_4 ->setIcon(ButtonIcon_4);
     pushButton_5->setText("Compress");
     pushButton_5 ->setIcon(ButtonIcon_5);
+    textEdit-> setReadOnly(true);
 
 
 
 
-    textBrowser =new QTextBrowser();
+    //textBrowser =new QTextBrowser();
 
     horizontal_layout ->addWidget(pushButton);
     horizontal_layout ->addWidget(pushButton_2);
@@ -123,7 +125,8 @@ MainWindow::MainWindow(QWidget *parent)
     horizontal_layout ->addWidget(pushButton_4);
     horizontal_layout ->addWidget(pushButton_5);
     vertical_layout->addLayout(horizontal_layout);
-    vertical_layout->addWidget(textBrowser);
+    //vertical_layout->addWidget(textBrowser);
+    vertical_layout->addWidget(textEdit);
 
     tabWidget->setTabsClosable(true);
 
@@ -165,16 +168,34 @@ void MainWindow::on_push_button_clicked()
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
         return;
     QTextStream in(&file);
-        QString text;
+        QString text ;
+        vector <QString> text2;
         while (!in.atEnd()) {
             QString line = in.readLine();
-            text.append(line+"\n");
+            text2.push_back(line);
             string line_string = line.toStdString();
             parse_xml(xml, line_string, line_number);
         }
 
-        textBrowser->setText(text);
-        XML_Tree->vector_to_tree(xml);
+
+        //textEdit->setText(text);
+
+        vector <int> errors;
+        errors= XML_Tree->vector_to_tree(xml);
+        sort(errors.begin(),errors.end());
+        int x =0;
+        textEdit->setFontPointSize(13);
+        for(int i=0;i<text2.size();i++){
+            if(x<errors.size()&&i == errors[x]){
+                textEdit->setTextBackgroundColor("#F05454");
+                textEdit->append(text2[i]);
+                x++;
+            }
+            else{
+                textEdit->setTextBackgroundColor("white");
+                textEdit->append(text2[i]);
+            }
+        }
         //XML_Tree->~Tree();
     file.close();
 }
