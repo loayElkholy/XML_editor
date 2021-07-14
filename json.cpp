@@ -1,7 +1,7 @@
 #include "json.h"
 #include "ui_json.h"
 #include "compress.h"
-extern Tree XML_Tree;
+extern Tree *XML_Tree;
 extern MainWindow *w;
 
 json::json(QWidget *parent) :
@@ -12,7 +12,7 @@ json::json(QWidget *parent) :
 
     ofstream out("json.txt");
     cout.rdbuf(out.rdbuf());
-    XML_Tree.json();
+    XML_Tree->json();
     out.close();
     ifstream input("json.txt");
     string s2;
