@@ -3,7 +3,7 @@
 
 #include <QWidget>
 #include <QPushButton>
-#include <QTextBrowser>
+#include <QTextEdit>
 
 namespace Ui {
 class Format;
@@ -24,7 +24,7 @@ private slots:
 private:
     Ui::Format *ui;
     QPushButton *pushButton_save;
-    QTextBrowser *textBrowser_format;
+    QTextEdit *textEdit = new QTextEdit;
 };
 
 #endif // FORMAT_H
