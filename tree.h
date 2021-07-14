@@ -43,7 +43,7 @@ class Tree
 
 public:
     void format_public(string s);
-    void minify(string no_space);
+    void minify(string &no_space);
     vector<int> vector_to_tree(vector<xml_parse> v);
     void json();
 };

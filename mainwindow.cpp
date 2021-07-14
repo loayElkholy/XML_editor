@@ -21,6 +21,7 @@ using namespace std;
 
 Tree XML_Tree ;
 
+
 void MainWindow::parse_xml(vector<xml_parse> &xml , string line, int& line_number) {
     xml_parse temp;
     int new_i = 0;
@@ -155,6 +156,8 @@ void MainWindow::on_push_button_3_clicked()
 }
 void MainWindow::on_push_button_clicked()
 {
+    vector<xml_parse> xml;
+    int line_number = 0;
     QString filter = "All Files (*.*) ;; Text Files (*.txt) ;; XML Files (*.xml)";
     QString file_name = QFileDialog::getOpenFileName(this,"choose file","C:\\",filter);
 
@@ -167,10 +170,11 @@ void MainWindow::on_push_button_clicked()
             QString line = in.readLine();
             text.append(line+"\n");
             string line_string = line.toStdString();
-            qDebug() << QString::fromStdString(line_string);
+            parse_xml(xml, line_string, line_number);
         }
 
         textBrowser->setText(text);
+        XML_Tree.vector_to_tree(xml);
 
     file.close();
 }
@@ -194,6 +198,20 @@ void MainWindow::on_pushButton_5_clicked() {
 
 void MainWindow::on_tabWidget_tabCloseRequested(int index){
     tabWidget->removeTab(index);
+}
+
+void save_file(QTextBrowser *textBrowser) {
+    QString filter = "All Files (*.*) ;; Text Files (*.txt) ;; XML Files (*.xml)";
+    QString file_name = QFileDialog::getSaveFileName(NULL, "Save File","C:\\",filter);
+    QFile file(file_name);
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+        return;
+    QTextStream out(&file);
+    QString text = textBrowser->toPlainText();
+    out << text;
+    file.flush();
+    file.close();
+
 }
 
 MainWindow::~MainWindow()

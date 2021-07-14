@@ -11,16 +11,14 @@ json::json(QWidget *parent) :
 
     ofstream out("json.txt");
     cout.rdbuf(out.rdbuf());
-    cout<<"loay";
-    //XML_Tree.json();
-
+    XML_Tree.json();
+    out.close();
     ifstream input("json.txt");
     string s2;
     QString json;
     if (input.is_open()) {
         while (getline(input, s2)) {
-            json += QString::fromStdString(s2);
-            json += "\n";
+            json.append(QString::fromStdString(s2)+"\n");
         }
     }
     textBrowser->setText(json);

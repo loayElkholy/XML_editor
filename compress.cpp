@@ -4,6 +4,8 @@
 #include <QIcon>
 #include <QPixmap>
 
+extern Tree XML_Tree;
+
 int mul_char_code = 256;
 vector<int> code;
 //vector<int> total_code;
@@ -37,13 +39,13 @@ Compress::Compress(QWidget *parent) :
 
     connect_tab_fn();
 
-
     for (int i = 0; i <= 255; i++) {
         string character = "";
         character += char(i);
         encoded_table[character] = i;
     }
     string s1;
+    XML_Tree.minify(s1);
     QString text_encoded;
     code = compress_file(encoded_table, s1, mul_char_code);
     for (int i = 0; i < code.size(); i++) {
@@ -53,7 +55,12 @@ Compress::Compress(QWidget *parent) :
 }
 
 void Compress::connect_tab_fn() {
+    connect(pushButton, SIGNAL(clicked()), this, SLOT(on_pushButton_clicked()));
     connect(pushButton_2, SIGNAL(clicked()), this, SLOT(on_pushButton_2_clicked()));
+}
+
+void Compress::on_pushButton_clicked() {
+    save_file(textBrowser);
 }
 
 void Compress::on_pushButton_2_clicked() {

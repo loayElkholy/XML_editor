@@ -101,7 +101,7 @@ void Tree::print(Node* root_ptr,string * no_space) {
 
 }
 
-void Tree::minify(string no_space) {
+void Tree::minify(string &no_space) {
     print(root,&no_space);
 }
 

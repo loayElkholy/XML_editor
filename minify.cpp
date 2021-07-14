@@ -35,8 +35,8 @@ minify::minify(QWidget *parent) :
     main_layout->addLayout(vertical_layout);
 
     setLayout(main_layout);
-    string s ="Lina";
-    //XML_Tree.minify(s);
+    string s;
+    XML_Tree.minify(s);
     QString text = QString::fromStdString(s);
     textBrowser_minify->setText(text);
 }
