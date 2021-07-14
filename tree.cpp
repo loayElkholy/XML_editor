@@ -105,53 +105,53 @@ void Tree::minify(string no_space) {
     print(root,&no_space);
 }
 
-void Tree::format_public()
+void Tree::format_public(string s)
 {
-    format(root,0);
+    format(root,0, &s);
 }
 
-void Tree::format(Node* root, int count)
+void Tree::format(Node* root, int count, string *s)
  {
      for (int i = 0; i < count; i++)
      {
-         cout << "   ";
+         *s += "   ";
      }
-     cout << "<" << root->name;
+     *s += "<" + (root->name);
      if (root->attribute.length() != 0)
      {
-         cout << " " << root->attribute;
+         *s += " " + (root->attribute);
      }
      if (root->is_self_closing) {
-         cout<< '/';
+         *s += '/';
      }
-     cout << ">";
+     *s += ">";
      if (root->value == "" && !root->is_self_closing)
      {
          count++;
-         cout << endl;
+         *s += "\n";
      }
      else
      {
          if (!root->is_self_closing) {
-             cout << root->value; cout << "</" << root->name << ">\n";
+             *s += (root->value);
+             *s += "</" + (root->name) + ">\n";
          }
          else {
-             cout << "\n";
+             *s += "\n";
          }
          return;
      }
      for (int i = 0; i < root->children.size(); i++)
      {
-             format(root->children[i], count);
+             format(root->children[i], count, s);
      }
      count--;
      for (int i = 0; i < count; i++)
      {
-         cout << "   ";
+         *s += "   ";
      }
-
-     cout << "</" << root->name << ">";
-     cout << endl;
+     *s += "</" + (root->name) + ">";
+     *s += "\n";
 }
 
 

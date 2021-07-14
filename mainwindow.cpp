@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "format.h"
 #include "minify.h"
 #include <iostream>
 #include<string>
@@ -11,6 +12,8 @@
 #include <QFileDialog>
 #include<QIcon>
 #include<QPixmap>
+
+
 #include "json.h"
 #include <fstream>
 #include "compress.h"
@@ -135,6 +138,7 @@ MainWindow::MainWindow(QWidget *parent)
 void MainWindow::connect_fun()
 {
     connect(pushButton,SIGNAL(clicked()),this,SLOT(on_push_button_clicked()));
+    connect(pushButton_2,SIGNAL(clicked()),this,SLOT(on_push_button_format_clicked()));
     connect(pushButton_4,SIGNAL(clicked()),this,SLOT(on_push_button_4_clicked()));
     connect(pushButton_5, SIGNAL(clicked()), this, SLOT(on_pushButton_5_clicked()));
     connect(tabWidget, SIGNAL(tabCloseRequested(int)), this, SLOT(on_tabWidget_tabCloseRequested(int)));
@@ -170,6 +174,13 @@ void MainWindow::on_push_button_clicked()
 
     file.close();
 }
+
+void MainWindow::on_push_button_format_clicked()
+{
+       tabWidget->addTab(new Format(),"Format");
+       tabWidget->setCurrentIndex(tabWidget->count() - 1);
+}
+
 void MainWindow::on_push_button_4_clicked()
 {
      tabWidget ->addTab(new minify(),"minified file");
