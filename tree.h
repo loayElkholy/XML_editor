@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
-
+#include <QString>
 using namespace std;
 
 typedef struct {

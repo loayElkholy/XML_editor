@@ -1,10 +1,11 @@
 <RCC>
     <qresource prefix="/rec">
-        <file>icons/compress.png</file>
         <file>icons/Custom-Icon-Design-Pretty-Office-7-Save.ico</file>
         <file>icons/Custom-Icon-Design-Pretty-Office-9-Open-file.ico</file>
         <file>icons/format.ico</file>
         <file>icons/json-icon-png-18.jpg</file>
         <file>icons/minify</file>
+        <file>icons/decompress.png</file>
+        <file>icons/compress2.png</file>
     </qresource>
 </RCC>

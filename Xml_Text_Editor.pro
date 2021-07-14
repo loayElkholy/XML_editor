@@ -10,17 +10,27 @@ CONFIG += c++11
 
 SOURCES += \
     format.cpp \
+    json.cpp \
+    compress.cpp \
     main.cpp \
     mainwindow.cpp \
+    minify.cpp \
     tree.cpp
 
 HEADERS += \
     format.h \
+    json.h \
+    compress.h \
     mainwindow.h \
+    minify.h \
     tree.h
 
 FORMS += \
     format.ui \
+    mainwindow.ui \
+    minify.ui
+    json.ui \
+    compress.ui \
     mainwindow.ui
 
 # Default rules for deployment.
