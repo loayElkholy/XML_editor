@@ -27,6 +27,7 @@ public:
     void connect_fun();
     void connect_fun_json();
     void parse_xml(vector<xml_parse> &xml, string line, int &line_number);
+    QTabWidget *tabWidget = new QTabWidget;
 
 private slots:
     void on_push_button_clicked();
@@ -44,6 +45,5 @@ private:
     QPushButton *pushButton_4 = new QPushButton;
     QPushButton *pushButton_5 = new QPushButton;
     QTextBrowser *textBrowser;
-    QTabWidget *tabWidget = new QTabWidget;
 };
 #endif // MAINWINDOW_H

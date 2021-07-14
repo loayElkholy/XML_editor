@@ -1,7 +1,8 @@
 #include "json.h"
 #include "ui_json.h"
-
+#include "compress.h"
 extern Tree XML_Tree;
+extern MainWindow *w;
 
 json::json(QWidget *parent) :
     QWidget(parent),
@@ -29,7 +30,7 @@ json::json(QWidget *parent) :
 
     QPixmap pixmap(":\\rec\\icons\\Custom-Icon-Design-Pretty-Office-7-Save.ico");
     QIcon ButtonIcon(pixmap);
-    pushButton->setText("save");
+    pushButton->setText("Save File");
     pushButton->setIcon(ButtonIcon);
 
 
@@ -44,23 +45,25 @@ json::json(QWidget *parent) :
     vertical_widget->addLayout(horizontal_widget);
     vertical_widget->addWidget(textBrowser);
 
+    connect_fun();
+
     setLayout(vertical_widget);
 }
 void json::connect_fun()
 {
     connect(pushButton,SIGNAL(clicked()),this,SLOT(on_push_button_clicked()));
-}
-void json::connect_fun_2()
-{
     connect(pushButton_2,SIGNAL(clicked()),this,SLOT(on_push_button_2_clicked()));
+
 }
+
 void json::on_push_button_2_clicked()
 {
-
+    w->tabWidget->addTab(new Compress(), "Compressed json File");
+    w->tabWidget->setCurrentIndex(w->tabWidget->count() - 1);
 }
 void json::on_push_button_clicked()
 {
-
+    save_file(textBrowser);
 }
 json::~json()
 {

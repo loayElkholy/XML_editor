@@ -152,7 +152,7 @@ void MainWindow::on_push_button_3_clicked()
 {
     QWidget *j =new json();
    tabWidget->addTab(j,"Json");
-   tabWidget->setCurrentWidget(j);
+   tabWidget ->setCurrentIndex(tabWidget->count()-1);
 }
 void MainWindow::on_push_button_clicked()
 {
@@ -192,7 +192,7 @@ void MainWindow::on_push_button_4_clicked()
 }
 
 void MainWindow::on_pushButton_5_clicked() {
-    tabWidget->addTab(new Compress(), "Compress File");
+    tabWidget->addTab(new Compress(), "Compressed File");
     tabWidget->setCurrentIndex(tabWidget->count() - 1);
 }
 
