@@ -222,14 +222,14 @@ void MainWindow::on_tabWidget_tabCloseRequested(int index){
     tabWidget->removeTab(index);
 }
 
-void save_file(QTextBrowser *textBrowser) {
+void save_file(QTextEdit *textEdit) {
     QString filter = "All Files (*.*) ;; Text Files (*.txt) ;; XML Files (*.xml)";
     QString file_name = QFileDialog::getSaveFileName(NULL, "Save File","C:\\",filter);
     QFile file(file_name);
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
         return;
     QTextStream out(&file);
-    QString text = textBrowser->toPlainText();
+    QString text = textEdit->toPlainText();
     out << text;
     file.flush();
     file.close();

@@ -4,7 +4,7 @@
 #include <QWidget>
 #include "mainwindow.h"
 #include "json.h"
-#include <QTextBrowser>
+#include <QTextEdit>
 #include <QPushButton>
 
 namespace Ui {
@@ -28,7 +28,7 @@ private slots:
 
 private:
     Ui::Compress *ui;
-    QTextBrowser *textBrowser = new QTextBrowser;
+    QTextEdit *textEdit = new QTextEdit;
     QPushButton *pushButton = new QPushButton;
     QPushButton *pushButton_2 = new QPushButton;
 };

@@ -31,12 +31,12 @@ Compress::Compress(QWidget *parent) :
     pushButton->setIcon(icon);
     pushButton_2->setText("Decompress File");
     pushButton_2->setIcon(icon_2);
-//    int i = w->tabWidget->indexOf(w->tabWidget->currentWidget());
-//    QString current_tab_name = w->tabWidget->tabText(i);
+    textEdit->setReadOnly(true);
+    textEdit->setFontPointSize(13);
     horizontal_buttons_layout->addWidget(pushButton);
     horizontal_buttons_layout->addWidget(pushButton_2);
     vertical_tab_layout->addLayout(horizontal_buttons_layout);
-    vertical_tab_layout->addWidget(textBrowser);
+    vertical_tab_layout->addWidget(textEdit);
     main_tab_layout->addLayout(vertical_tab_layout);
     setLayout(main_tab_layout);
     connect_tab_fn();
@@ -58,7 +58,7 @@ Compress::Compress(QWidget *parent) :
     for (int i = 0; i < code.size(); i++) {
         text_encoded += QString::number(code[i]);
     }
-    textBrowser->setText(text_encoded);
+    textEdit->setText(text_encoded);
 }
 
 void Compress::connect_tab_fn() {
@@ -67,7 +67,7 @@ void Compress::connect_tab_fn() {
 }
 
 void Compress::on_pushButton_clicked() {
-    save_file(textBrowser);
+    save_file(textEdit);
 }
 
 void Compress::on_pushButton_2_clicked() {
