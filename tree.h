@@ -26,6 +26,7 @@ public:
     Node* parent;
     vector <Node*> children;
     Node(string name) : name{ name },found{false}, value{ "\0" }, attribute{ "\0" }, is_self_closing{false}, children{}, parent{ nullptr }{}
+    ~Node();
 };
 
 class Tree
@@ -46,6 +47,7 @@ public:
     void minify(string &no_space);
     vector<int> vector_to_tree(vector<xml_parse> v);
     void json();
+
 };
 
 
