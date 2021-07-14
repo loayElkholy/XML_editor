@@ -108,7 +108,7 @@ void Compress::decode(map<int, string> table_decode, vector<int> encoded_code) {
         s += table_decode[encoded_code[i]];
     }
     QString text_decoded = QString::fromStdString(s);
-    textBrowser->setText(text_decoded);
+    textEdit->setText(text_decoded);
 }
 
 Compress::~Compress()

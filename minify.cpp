@@ -64,7 +64,7 @@ void minify::on_push_button_compress_clicked()
 }
 void minify::on_push_button_save_clicked()
 {
-    //save_file(textBrowser_minify);
+    save_file(textBrowser_minify);
 }
 
 minify::~minify()
