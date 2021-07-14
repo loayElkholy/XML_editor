@@ -12,7 +12,7 @@ json::json(QWidget *parent) :
     ofstream out("json.txt");
     cout.rdbuf(out.rdbuf());
     cout<<"loay";
-    XML_Tree.json();
+    //XML_Tree.json();
 
     ifstream input("json.txt");
     string s2;
