@@ -10,7 +10,8 @@
 #include <QFileDialog>
 #include<QIcon>
 #include<QPixmap>
-
+#include "json.h"
+#include <fstream>
 using namespace std;
 
 Tree XML_Tree ;
@@ -124,6 +125,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
     QWidget *widget= new QWidget() ;
     QHBoxLayout *main_layout =new QHBoxLayout();
     QVBoxLayout *vertical_layout =new QVBoxLayout();
@@ -169,6 +171,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     connect_fun();
+    connect_fun_json();
     main_layout->addLayout(vertical_layout);
     widget->setLayout(main_layout);
     tabWidget ->addTab(widget,"input file");
@@ -178,6 +181,16 @@ MainWindow::MainWindow(QWidget *parent)
 void MainWindow::connect_fun()
 {
     connect(pushButton,SIGNAL(clicked()),this,SLOT(on_push_button_clicked()));
+}
+void MainWindow::connect_fun_json()
+{
+    connect(pushButton_3,SIGNAL(clicked()),this,SLOT(on_push_button_3_clicked()));
+}
+void MainWindow::on_push_button_3_clicked()
+{
+    QWidget *j =new json();
+   tabWidget->addTab(j,"Json");
+   tabWidget->setCurrentWidget(j);
 }
 void MainWindow::on_push_button_clicked()
 {

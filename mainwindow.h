@@ -26,9 +26,13 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void connect_fun();
+    void connect_fun_json();
     void parse_xml(vector<xml_parse> &xml, string line, int &line_number);
+
 private slots:
     void on_push_button_clicked();
+    void on_push_button_3_clicked();
+
 private:
     Ui::MainWindow *ui;
     QPushButton *pushButton;
@@ -38,6 +42,5 @@ private:
     QPushButton *pushButton_5 = new QPushButton;
     QTextBrowser *textBrowser;
     QTabWidget *tabWidget = new QTabWidget;
-
 };
 #endif // MAINWINDOW_H
