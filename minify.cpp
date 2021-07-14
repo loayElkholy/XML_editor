@@ -10,6 +10,7 @@
 
 extern Tree *XML_Tree;
 extern MainWindow *w;
+extern int flag;
 
 minify::minify(QWidget *parent) :
     QWidget(parent),
@@ -32,6 +33,7 @@ minify::minify(QWidget *parent) :
     horizontal_layout ->addWidget(pushButton_save);
     horizontal_layout ->addWidget(pushButton_compress);
     vertical_layout->addLayout(horizontal_layout);
+    textBrowser_minify->setReadOnly(true);
     vertical_layout->addWidget(textBrowser_minify);
 
     main_layout->addLayout(vertical_layout);
@@ -42,7 +44,9 @@ minify::minify(QWidget *parent) :
     string s;
     XML_Tree->minify(s);
     QString text = QString::fromStdString(s);
+    textBrowser_minify->setFontPointSize(13);
     textBrowser_minify->setText(text);
+
 }
 
 void minify::connect_fun()
@@ -54,12 +58,13 @@ void minify::connect_fun()
 
 void minify::on_push_button_compress_clicked()
 {
+    flag = 1;
     w->tabWidget->addTab(new Compress(), "Compressed File");
     w->tabWidget->setCurrentIndex(w->tabWidget->count() - 1);
 }
 void minify::on_push_button_save_clicked()
 {
-    save_file(textBrowser_minify);
+    //save_file(textBrowser_minify);
 }
 
 minify::~minify()

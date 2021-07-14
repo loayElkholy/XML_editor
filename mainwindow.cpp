@@ -158,6 +158,7 @@ void MainWindow::on_push_button_3_clicked()
 }
 void MainWindow::on_push_button_clicked()
 {
+    textEdit->clear();
     XML_Tree = new Tree();
     vector<xml_parse> xml;
     int line_number = 0;
@@ -197,6 +198,7 @@ void MainWindow::on_push_button_clicked()
             }
         }
         //XML_Tree->~Tree();
+
     file.close();
 }
 
