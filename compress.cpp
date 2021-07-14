@@ -4,7 +4,7 @@
 #include <QIcon>
 #include <QPixmap>
 
-extern Tree XML_Tree;
+extern Tree *XML_Tree;
 
 int mul_char_code = 256;
 vector<int> code;
@@ -45,7 +45,7 @@ Compress::Compress(QWidget *parent) :
         encoded_table[character] = i;
     }
     string s1;
-    XML_Tree.minify(s1);
+    XML_Tree->minify(s1);
     QString text_encoded;
     code = compress_file(encoded_table, s1, mul_char_code);
     for (int i = 0; i < code.size(); i++) {

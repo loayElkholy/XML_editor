@@ -2,12 +2,14 @@
 #include "ui_minify.h"
 #include "mainwindow.h"
 #include "tree.h"
+#include "compress.h"
 #include <QtWidgets>
 #include <QTextStream>
 #include<QIcon>
 #include<QPixmap>
 
-extern Tree XML_Tree;
+extern Tree *XML_Tree;
+extern MainWindow *w;
 
 minify::minify(QWidget *parent) :
     QWidget(parent),
@@ -34,11 +36,30 @@ minify::minify(QWidget *parent) :
 
     main_layout->addLayout(vertical_layout);
 
+
     setLayout(main_layout);
+    connect_fun();
     string s;
-    XML_Tree.minify(s);
+    XML_Tree->minify(s);
     QString text = QString::fromStdString(s);
     textBrowser_minify->setText(text);
+}
+
+void minify::connect_fun()
+{
+    connect(pushButton_save,SIGNAL(clicked()),this,SLOT(on_push_button_save_clicked()));
+    connect(pushButton_compress,SIGNAL(clicked()),this,SLOT(on_push_button_compress_clicked()));
+
+}
+
+void minify::on_push_button_compress_clicked()
+{
+    w->tabWidget->addTab(new Compress(), "Compressed File");
+    w->tabWidget->setCurrentIndex(w->tabWidget->count() - 1);
+}
+void minify::on_push_button_save_clicked()
+{
+    save_file(textBrowser_minify);
 }
 
 minify::~minify()
