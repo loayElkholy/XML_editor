@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "format.h"
 #include <iostream>
 #include<string>
 #include<string.h>
@@ -10,6 +11,7 @@
 #include <QFileDialog>
 #include<QIcon>
 #include<QPixmap>
+
 
 using namespace std;
 
@@ -178,6 +180,7 @@ MainWindow::MainWindow(QWidget *parent)
 void MainWindow::connect_fun()
 {
     connect(pushButton,SIGNAL(clicked()),this,SLOT(on_push_button_clicked()));
+    connect(pushButton_2,SIGNAL(clicked()),this,SLOT(on_push_button_format_clicked()));
 }
 void MainWindow::on_push_button_clicked()
 {
@@ -199,6 +202,13 @@ void MainWindow::on_push_button_clicked()
         textBrowser->setText(text);
     file.close();
 }
+
+void MainWindow::on_push_button_format_clicked()
+{
+       tabWidget->addTab(new Format(),"Format");
+       tabWidget->setCurrentIndex(tabWidget->count() - 1);
+}
+
 MainWindow::~MainWindow()
 {
     delete ui;
