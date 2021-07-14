@@ -105,7 +105,7 @@ void Tree::minify(string &no_space) {
     print(root,&no_space);
 }
 
-void Tree::format_public(string s)
+void Tree::format_public(string &s)
 {
     format(root,0, &s);
 }

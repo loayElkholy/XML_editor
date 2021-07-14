@@ -18,7 +18,7 @@ Format::Format(QWidget *parent) :
     QIcon ButtonIcon_s(pixmap);
 
     pushButton_save =new QPushButton();
-    pushButton_save->setText("Save");
+    pushButton_save->setText("Save File");
     pushButton_save->setIcon(ButtonIcon_s);
 
     textBrowser_format =new QTextBrowser();
@@ -31,11 +31,20 @@ Format::Format(QWidget *parent) :
     setLayout(main_layout);
 
     string input;
-    //XML_Tree.format_public(input);
+    XML_Tree.format_public(input);
     QString text = QString::fromStdString(input);
     textBrowser_format->setText(text);
+    connect_save();
 }
 
+void Format::connect_save()
+{
+    connect(pushButton_save, SIGNAL(clicked()), this, SLOT(on_pushButton_save_clicked()));
+}
+
+void Format::on_pushButton_save_clicked() {
+    save_file(textBrowser_format);
+}
 Format::~Format()
 {
     delete ui;

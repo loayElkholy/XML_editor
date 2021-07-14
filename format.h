@@ -15,7 +15,11 @@ class Format : public QWidget
 
 public:
     explicit Format(QWidget *parent = nullptr);
+    void connect_save();
     ~Format();
+
+private slots:
+    void on_pushButton_save_clicked();
 
 private:
     Ui::Format *ui;
