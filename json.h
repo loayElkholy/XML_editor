@@ -14,6 +14,7 @@
 #include<QPixmap>
 #include <QWidget>
 #include <fstream>
+#include <QTextEdit>
 namespace Ui {
 class json;
 }
@@ -32,7 +33,7 @@ private:
     Ui::json *ui;
     QPushButton *pushButton= new QPushButton;
     QPushButton *pushButton_2 = new QPushButton;
-    QTextBrowser *textBrowser =new QTextBrowser;
+    QTextEdit *textEdit =new QTextEdit;
     void connect_fun();
     void connect_fun_2();
 
