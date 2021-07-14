@@ -88,7 +88,7 @@ MainWindow::MainWindow(QWidget *parent)
     QIcon ButtonIcon_3(pixmap_3);
     QPixmap pixmap_4(":\\rec\\icons\\minify");
     QIcon ButtonIcon_4(pixmap_4);
-    QPixmap pixmap_5(":\\rec\\icons\\compress.png");
+    QPixmap pixmap_5(":\\rec\\icons\\compress2.png");
     QIcon ButtonIcon_5(pixmap_5);
 
 
