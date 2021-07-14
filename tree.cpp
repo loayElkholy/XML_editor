@@ -1,5 +1,5 @@
 #include "tree.h"
-
+#include "fstream"
 void Tree::json()
 {
     cout << '{' << endl;
@@ -214,6 +214,7 @@ void Tree::print_attr(vector<pair<string, string>>s)
        ind(); cout<<"\"@"<<s[i].first <<"\": "<<s[i].second;
    }
 }
+
 void Tree::Pjson(Node* r ,bool flag=true)
 {
    tag t = get_tag_struct(r->name ,r->attribute);
