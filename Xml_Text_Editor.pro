@@ -27,8 +27,7 @@ HEADERS += \
 
 FORMS += \
     format.ui \
-    mainwindow.ui \
-    minify.ui
+    minify.ui \
     json.ui \
     compress.ui \
     mainwindow.ui

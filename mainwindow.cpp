@@ -181,7 +181,6 @@ void MainWindow::on_push_button_format_clicked()
        tabWidget->setCurrentIndex(tabWidget->count() - 1);
 }
 
-MainWindow::~MainWindow()
 void MainWindow::on_push_button_4_clicked()
 {
      tabWidget ->addTab(new minify(),"minified file");
