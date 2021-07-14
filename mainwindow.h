@@ -32,6 +32,8 @@ public:
 private slots:
     void on_push_button_clicked();
     void on_push_button_3_clicked();
+    void on_pushButton_5_clicked();
+    void on_tabWidget_tabCloseRequested(int index);
 
 private:
     Ui::MainWindow *ui;
