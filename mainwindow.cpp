@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "minify.h"
 #include <iostream>
 #include<string>
 #include<string.h>
@@ -178,6 +179,7 @@ MainWindow::MainWindow(QWidget *parent)
 void MainWindow::connect_fun()
 {
     connect(pushButton,SIGNAL(clicked()),this,SLOT(on_push_button_clicked()));
+    connect(pushButton_4,SIGNAL(clicked()),this,SLOT(on_push_button_4_clicked()));
 }
 void MainWindow::on_push_button_clicked()
 {
@@ -197,7 +199,13 @@ void MainWindow::on_push_button_clicked()
         }
 
         textBrowser->setText(text);
+
     file.close();
+}
+void MainWindow::on_push_button_4_clicked()
+{
+     tabWidget ->addTab(new minify(),"minified file");
+     tabWidget ->setCurrentIndex(tabWidget->count()-1);
 }
 MainWindow::~MainWindow()
 {

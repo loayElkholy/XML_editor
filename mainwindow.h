@@ -29,6 +29,7 @@ public:
     void parse_xml(vector<xml_parse> &xml, string line, int &line_number);
 private slots:
     void on_push_button_clicked();
+    void on_push_button_4_clicked();
 private:
     Ui::MainWindow *ui;
     QPushButton *pushButton;

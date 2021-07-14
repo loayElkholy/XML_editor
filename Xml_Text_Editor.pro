@@ -11,14 +11,17 @@ CONFIG += c++11
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
+    minify.cpp \
     tree.cpp
 
 HEADERS += \
     mainwindow.h \
+    minify.h \
     tree.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    minify.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
