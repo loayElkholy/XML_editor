@@ -42,12 +42,13 @@ class Tree
     tag get_tag_struct(string s1, string name);
     void format(Node* root, int count, string *s);
 
+
 public:
     void format_public(string &s);
     void minify(string &no_space);
     vector<int> vector_to_tree(vector<xml_parse> v);
     void json();
-
+    ~Tree();
 };
 
 

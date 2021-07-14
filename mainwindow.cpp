@@ -19,8 +19,8 @@
 #include "compress.h"
 using namespace std;
 
-Tree *XML_Tree=new Tree(); ;
-
+Tree *XML_Tree = new Tree();
+int flag;
 
 void MainWindow::parse_xml(vector<xml_parse> &xml , string line, int& line_number) {
     xml_parse temp;
@@ -155,7 +155,7 @@ void MainWindow::on_push_button_3_clicked()
 }
 void MainWindow::on_push_button_clicked()
 {
-    XML_Tree =new Tree();
+    XML_Tree = new Tree();
     vector<xml_parse> xml;
     int line_number = 0;
     QString filter = "All Files (*.*) ;; Text Files (*.txt) ;; XML Files (*.xml)";
@@ -175,7 +175,7 @@ void MainWindow::on_push_button_clicked()
 
         textBrowser->setText(text);
         XML_Tree->vector_to_tree(xml);
-
+        //XML_Tree->~Tree();
     file.close();
 }
 
@@ -192,6 +192,7 @@ void MainWindow::on_push_button_4_clicked()
 }
 
 void MainWindow::on_pushButton_5_clicked() {
+    flag = 1;
     tabWidget->addTab(new Compress(), "Compressed File");
     tabWidget->setCurrentIndex(tabWidget->count() - 1);
 }

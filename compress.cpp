@@ -5,10 +5,12 @@
 #include <QPixmap>
 
 extern Tree *XML_Tree;
+extern MainWindow *w;
+extern int flag;
+extern QString json_file;
 
 int mul_char_code = 256;
 vector<int> code;
-//vector<int> total_code;
 map<string, int> encoded_table;
 
 Compress::Compress(QWidget *parent) :
@@ -29,14 +31,14 @@ Compress::Compress(QWidget *parent) :
     pushButton->setIcon(icon);
     pushButton_2->setText("Decompress File");
     pushButton_2->setIcon(icon_2);
-
+//    int i = w->tabWidget->indexOf(w->tabWidget->currentWidget());
+//    QString current_tab_name = w->tabWidget->tabText(i);
     horizontal_buttons_layout->addWidget(pushButton);
     horizontal_buttons_layout->addWidget(pushButton_2);
     vertical_tab_layout->addLayout(horizontal_buttons_layout);
     vertical_tab_layout->addWidget(textBrowser);
     main_tab_layout->addLayout(vertical_tab_layout);
     setLayout(main_tab_layout);
-
     connect_tab_fn();
 
     for (int i = 0; i <= 255; i++) {
@@ -45,7 +47,12 @@ Compress::Compress(QWidget *parent) :
         encoded_table[character] = i;
     }
     string s1;
-    XML_Tree->minify(s1);
+    if (flag == 1) {
+        XML_Tree->minify(s1);
+    }
+    else if (flag == 2) {
+        s1 = json_file.toStdString();
+    }
     QString text_encoded;
     code = compress_file(encoded_table, s1, mul_char_code);
     for (int i = 0; i < code.size(); i++) {

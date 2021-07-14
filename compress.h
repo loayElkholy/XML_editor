@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "mainwindow.h"
+#include "json.h"
 #include <QTextBrowser>
 #include <QPushButton>
 

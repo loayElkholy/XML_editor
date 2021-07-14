@@ -1,5 +1,6 @@
 #include "tree.h"
 #include "fstream"
+#include <QDebug>
 
 void Tree::json()
 {
@@ -311,4 +312,26 @@ void Tree::Pjson(Node* r ,bool flag=true)
 
 }
 
+Node::~Node() {
+//    for (int i = 0; i < children.size(); i++) {
+//        qDebug() << QString::fromStdString(children[i]->name);
+//    }
+    for (auto p : children)
+    {
+         delete p;
+    }
+
+}
+
+Tree::~Tree() {
+    delete root;
+    delete add;
+    if(root){
+        for (int i = 0; i <root->children.size(); i++) {
+            qDebug() << QString::fromStdString(root->children[i]->name);
+        }
+    }
+    else
+        qDebug() << "Null";
+}
 

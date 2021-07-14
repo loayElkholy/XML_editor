@@ -3,6 +3,8 @@
 #include "compress.h"
 extern Tree *XML_Tree;
 extern MainWindow *w;
+extern int flag;
+QString json_file;
 
 json::json(QWidget *parent) :
     QWidget(parent),
@@ -16,13 +18,12 @@ json::json(QWidget *parent) :
     out.close();
     ifstream input("json.txt");
     string s2;
-    QString json;
     if (input.is_open()) {
         while (getline(input, s2)) {
-            json.append(QString::fromStdString(s2)+"\n");
+            json_file.append(QString::fromStdString(s2)+"\n");
         }
     }
-    textBrowser->setText(json);
+    textBrowser->setText(json_file);
 
     MainWindow m;
     QVBoxLayout *vertical_widget =new QVBoxLayout();
@@ -58,6 +59,7 @@ void json::connect_fun()
 
 void json::on_push_button_2_clicked()
 {
+    flag = 2;
     w->tabWidget->addTab(new Compress(), "Compressed json File");
     w->tabWidget->setCurrentIndex(w->tabWidget->count() - 1);
 }
