@@ -4,7 +4,7 @@
 #include "mainwindow.h"
 #include <QtWidgets>
 
-extern Tree XML_Tree;
+extern Tree *XML_Tree;
 
 Format::Format(QWidget *parent) :
     QWidget(parent),
@@ -31,7 +31,7 @@ Format::Format(QWidget *parent) :
     setLayout(main_layout);
 
     string input;
-    XML_Tree.format_public(input);
+    XML_Tree->format_public(input);
     QString text = QString::fromStdString(input);
     textBrowser_format->setText(text);
     connect_save();
