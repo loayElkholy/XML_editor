@@ -19,7 +19,7 @@ minify::minify(QWidget *parent) :
     QHBoxLayout *horizontal_layout = new QHBoxLayout();
     QPixmap pixmap(":\\rec\\icons\\Custom-Icon-Design-Pretty-Office-7-Save.ico");
     QIcon ButtonIcon(pixmap);
-    QPixmap pixmap_2(":\\rec\\icons\\compress.png");
+    QPixmap pixmap_2(":\\rec\\icons\\compress2.png");
     QIcon ButtonIcon_2(pixmap_2);
     pushButton_save->setText("Save file");
     pushButton_save ->setIcon(ButtonIcon);

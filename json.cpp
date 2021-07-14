@@ -35,7 +35,7 @@ json::json(QWidget *parent) :
     pushButton->setIcon(ButtonIcon);
 
 
-    QPixmap pixmap_2(":\\rec\\icons\\compress.png");
+    QPixmap pixmap_2(":\\rec\\icons\\compress2.png");
     QIcon ButtonIcon_2(pixmap_2);
     pushButton_2->setText("Compress");
     pushButton_2->setIcon(ButtonIcon_2);

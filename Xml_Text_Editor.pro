@@ -24,8 +24,7 @@ HEADERS += \
     tree.h
 
 FORMS += \
-    mainwindow.ui \
-    minify.ui
+    minify.ui \
     json.ui \
     compress.ui \
     mainwindow.ui
