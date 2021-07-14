@@ -31,6 +31,7 @@ private:
     QTextEdit *textEdit = new QTextEdit;
     QPushButton *pushButton = new QPushButton;
     QPushButton *pushButton_2 = new QPushButton;
+    QPushButton *pushButton_3 = new QPushButton;
 };
 
 #endif // COMPRESS_H

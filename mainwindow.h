@@ -11,7 +11,7 @@
 
 using namespace std;
 
-void save_file(QTextBrowser *textBrowser);
+void save_file(QTextEdit *textEdit);
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
