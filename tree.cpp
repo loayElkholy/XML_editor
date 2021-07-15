@@ -83,9 +83,9 @@ vector<int> Tree::vector_to_tree(vector<xml_parse> v) {
 void Tree::print(Node* root_ptr,string * no_space) {
  string temp;
 
- *no_space += '<' + (root_ptr->name)+' ';
+ *no_space += '<' + (root_ptr->name);
  if (root_ptr->attribute != "\0") {
-   *no_space += root_ptr->attribute;
+   *no_space +=' '+root_ptr->attribute;
  }
  if (root_ptr->is_self_closing) {
      *no_space += '/';
