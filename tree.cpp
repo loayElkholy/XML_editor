@@ -7,6 +7,7 @@ void Tree::json()
     cout << '{' << endl;
     depth++;
     Pjson(root,true);
+    depth=0;
     cout << "\n}";
 }
 vector<int> Tree::vector_to_tree(vector<xml_parse> v) {
@@ -275,12 +276,13 @@ void Tree::Pjson(Node* r ,bool flag=true)
                {
                    Node* ch = r->children[i];
                    ind(); cout << "\"" << ch->name << "\": [\n"; depth++;
+
                    if (ch->children.size()==0 && ch->attribute=="")
                    {
                        for (int x = 0; x < index.size(); x++)
                        {
                            if (x) { cout << ",\n"; }
-                           ind(); cout << r->children[index[x]]->value;
+                           ind(); cout<<"\"" << r->children[index[x]]->value<<"\"";
                        }
                    }
                    else {

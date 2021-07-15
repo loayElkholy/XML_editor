@@ -13,20 +13,22 @@ json::json(QWidget *parent) :
     ui->setupUi(this);
     textEdit-> setReadOnly(true);
     textEdit->setFontPointSize(13);
-
     ofstream out("json.txt");
     cout.rdbuf(out.rdbuf());
     XML_Tree->json();
     out.close();
     ifstream input("json.txt");
     string s2;
+    json_file="";
     if (input.is_open()) {
         while (getline(input, s2)) {
             json_file.append(QString::fromStdString(s2)+"\n");
         }
     }
-
+    input.close();
     textEdit->setText(json_file);
+    QFile file ("json.txt");
+    file.remove();
 
     MainWindow m;
     QVBoxLayout *vertical_widget =new QVBoxLayout();
