@@ -13,7 +13,7 @@
 #include<QIcon>
 #include<QPixmap>
 #include<QTextEdit>
-
+#include<QMessageBox>
 
 #include "json.h"
 #include <fstream>
@@ -22,7 +22,6 @@ using namespace std;
 
 Tree *XML_Tree = new Tree();
 int flag;
-
 void MainWindow::parse_xml(vector<xml_parse> &xml , string line, int& line_number) {
     xml_parse temp;
     int new_i = 0;
@@ -152,22 +151,33 @@ void MainWindow::connect_fun_json()
 }
 void MainWindow::on_push_button_3_clicked()
 {
+    if(textEdit->toPlainText()==""){
+           QMessageBox::critical(this,"error","please open a XML file first");
+                return;
+    }
     QWidget *j =new json();
    tabWidget->addTab(j,"Json");
    tabWidget ->setCurrentIndex(tabWidget->count()-1);
+
 }
 void MainWindow::on_push_button_clicked()
 {
-    textEdit->clear();
-    XML_Tree = new Tree();
-    vector<xml_parse> xml;
-    int line_number = 0;
+
     QString filter = "All Files (*.*) ;; Text Files (*.txt) ;; XML Files (*.xml)";
     QString file_name = QFileDialog::getOpenFileName(this,"choose file","C:\\",filter);
 
     QFile file(file_name);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
         return;
+
+    for (int i = tabWidget->count() - 1; i > tabWidget->currentIndex(); --i) {
+       tabWidget->removeTab(i);
+    }
+    textEdit->clear();
+    XML_Tree = new Tree();
+    vector<xml_parse> xml;
+    int line_number = 0;
+
     QTextStream in(&file);
         QString text ;
         vector <QString> text2;
@@ -176,9 +186,6 @@ void MainWindow::on_push_button_clicked()
             text2.push_back(line);
             string line_string = line.toStdString();
             parse_xml(xml, line_string, line_number);
-        }
-        for (int i = 0; i < xml.size(); i++) {
-            qDebug() << QString::fromStdString(xml[i].xml_parsed);
         }
         //textEdit->setText(text);
 
@@ -205,20 +212,35 @@ void MainWindow::on_push_button_clicked()
 
 void MainWindow::on_push_button_format_clicked()
 {
-       tabWidget->addTab(new Format(),"Format");
+    if(textEdit->toPlainText()==""){
+           QMessageBox::critical(this,"error","please open a XML file first");
+                return;
+    }       tabWidget->addTab(new Format(),"Format");
        tabWidget->setCurrentIndex(tabWidget->count() - 1);
+
 }
 
 void MainWindow::on_push_button_4_clicked()
 {
+    if(textEdit->toPlainText()==""){
+           QMessageBox::critical(this,"error","please open a XML file first");
+                return;
+    }
      tabWidget ->addTab(new minify(),"minified file");
      tabWidget ->setCurrentIndex(tabWidget->count()-1);
+
 }
 
 void MainWindow::on_pushButton_5_clicked() {
+    if(textEdit->toPlainText()==""){
+           QMessageBox::critical(this,"error","please open a XML file first");
+                return;
+    }
+
     flag = 1;
     tabWidget->addTab(new Compress(), "Compressed File");
     tabWidget->setCurrentIndex(tabWidget->count() - 1);
+
 }
 
 void MainWindow::on_tabWidget_tabCloseRequested(int index){
