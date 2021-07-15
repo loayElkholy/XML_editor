@@ -25,12 +25,14 @@ public:
 private slots:
     void on_pushButton_clicked();
     void on_pushButton_2_clicked();
+    void on_pushButton_3_clicked();
 
 private:
     Ui::Compress *ui;
     QTextEdit *textEdit = new QTextEdit;
     QPushButton *pushButton = new QPushButton;
     QPushButton *pushButton_2 = new QPushButton;
+    QPushButton *pushButton_3 = new QPushButton;
 };
 
 #endif // COMPRESS_H

@@ -26,15 +26,22 @@ Compress::Compress(QWidget *parent) :
     QIcon icon(pixMap);
     QPixmap pixMap_2(":\\rec\\icons\\decompress.png");
     QIcon icon_2(pixMap_2);
+    QPixmap pixMap_3(":\\rec\\icons\\compress2.png");
+    QIcon icon_3(pixMap_3);
 
     pushButton->setText("Save File");
     pushButton->setIcon(icon);
     pushButton_2->setText("Decompress File");
     pushButton_2->setIcon(icon_2);
+    pushButton_3->setText("Compress File");
+    pushButton_3->setIcon(icon_3);
     textEdit->setFontPointSize(13);
+
+    pushButton_3->hide();
 
     horizontal_buttons_layout->addWidget(pushButton);
     horizontal_buttons_layout->addWidget(pushButton_2);
+    horizontal_buttons_layout->addWidget(pushButton_3);
     vertical_tab_layout->addLayout(horizontal_buttons_layout);
     vertical_tab_layout->addWidget(textEdit);
     main_tab_layout->addLayout(vertical_tab_layout);
@@ -53,7 +60,7 @@ Compress::Compress(QWidget *parent) :
     code = compress_file(s1);
     for (int i = 0; i < code.size(); i++) {
         text_encoded += QString::number(code[i]);
-        text_encoded += " ";
+        //text_encoded += " ";
     }
     textEdit->setText(text_encoded);
 }
@@ -61,6 +68,7 @@ Compress::Compress(QWidget *parent) :
 void Compress::connect_tab_fn() {
     connect(pushButton, SIGNAL(clicked()), this, SLOT(on_pushButton_clicked()));
     connect(pushButton_2, SIGNAL(clicked()), this, SLOT(on_pushButton_2_clicked()));
+    connect(pushButton_3, SIGNAL(clicked()), this, SLOT(on_pushButton_3_clicked()));
 }
 
 void Compress::on_pushButton_clicked() {
@@ -73,8 +81,29 @@ void Compress::on_pushButton_2_clicked() {
 //    for (itr = encoded_table.begin(); itr != encoded_table.end(); itr++) {
 //        table_decode[itr->second] = itr->first;
 //    }
+    pushButton_2->hide();
+    pushButton_3->show();
     decode(code);
     code.clear();
+}
+
+void Compress::on_pushButton_3_clicked() {
+    pushButton_3->hide();
+    pushButton_2->show();
+    string s1;
+    QString text_encoded;
+    if (flag == 1) {
+        XML_Tree->minify(s1);
+    }
+    else if (flag == 2) {
+        s1 = json_file.toStdString();
+    }
+    code = compress_file(s1);
+    for (int i = 0; i < code.size(); i++) {
+        text_encoded += QString::number(code[i]);
+        //text_encoded += " ";
+    }
+    textEdit->setText(text_encoded);
 }
 
 vector<int> Compress::compress_file(string file_encode) {
