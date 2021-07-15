@@ -177,8 +177,9 @@ void MainWindow::on_push_button_clicked()
             string line_string = line.toStdString();
             parse_xml(xml, line_string, line_number);
         }
-
-
+        for (int i = 0; i < xml.size(); i++) {
+            qDebug() << QString::fromStdString(xml[i].xml_parsed);
+        }
         //textEdit->setText(text);
 
         vector <int> errors;
