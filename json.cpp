@@ -11,6 +11,8 @@ json::json(QWidget *parent) :
     ui(new Ui::json)
 {
     ui->setupUi(this);
+    textEdit-> setReadOnly(true);
+    textEdit->setFontPointSize(13);
 
     ofstream out("json.txt");
     cout.rdbuf(out.rdbuf());
@@ -23,7 +25,8 @@ json::json(QWidget *parent) :
             json_file.append(QString::fromStdString(s2)+"\n");
         }
     }
-    textBrowser->setText(json_file);
+
+    textEdit->setText(json_file);
 
     MainWindow m;
     QVBoxLayout *vertical_widget =new QVBoxLayout();
@@ -44,7 +47,7 @@ json::json(QWidget *parent) :
     horizontal_widget->addWidget(pushButton_2);
 
     vertical_widget->addLayout(horizontal_widget);
-    vertical_widget->addWidget(textBrowser);
+    vertical_widget->addWidget(textEdit);
 
     connect_fun();
 
@@ -65,7 +68,7 @@ void json::on_push_button_2_clicked()
 }
 void json::on_push_button_clicked()
 {
-    save_file(textBrowser);
+    save_file(textEdit);
 }
 json::~json()
 {

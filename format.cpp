@@ -21,11 +21,13 @@ Format::Format(QWidget *parent) :
     pushButton_save->setText("Save File");
     pushButton_save->setIcon(ButtonIcon_s);
 
-    textBrowser_format =new QTextBrowser();
+    textEdit-> setReadOnly(true);
+    textEdit->setFontPointSize(13);
+    //textBrowser_format =new QTextBrowser();
 
     horizontal_layout_f ->addWidget(pushButton_save);
     vertical_layout_f->addLayout(horizontal_layout_f);
-    vertical_layout_f->addWidget(textBrowser_format);
+    vertical_layout_f->addWidget(textEdit);
 
     main_layout->addLayout(vertical_layout_f);
     setLayout(main_layout);
@@ -33,7 +35,9 @@ Format::Format(QWidget *parent) :
     string input;
     XML_Tree->format_public(input);
     QString text = QString::fromStdString(input);
-    textBrowser_format->setText(text);
+
+    textEdit->setText(text);
+    //textBrowser_format->setText(text);
     connect_save();
 }
 
@@ -43,7 +47,7 @@ void Format::connect_save()
 }
 
 void Format::on_pushButton_save_clicked() {
-    save_file(textBrowser_format);
+    save_file(textEdit);
 }
 Format::~Format()
 {
