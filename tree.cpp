@@ -29,6 +29,12 @@ vector<int> Tree::vector_to_tree(vector<xml_parse> v) {
  vector<int> error;
 
  for (int i = 1; i < v.size(); i++) {
+     if(add == nullptr){
+         for(int j=i;j<v.size();j++){
+             error.push_back(v[i].line_no);
+         }
+        return error;
+     }
      if (v[i].xml_parsed[0] == '<') {
          if (v[i].xml_parsed[1] == '/'){
              s = v[i].xml_parsed.substr(2, v[i].xml_parsed.length() - 3);
@@ -36,7 +42,16 @@ vector<int> Tree::vector_to_tree(vector<xml_parse> v) {
                  add = add->parent;
              }
              else {
-                 error.push_back((v[i].line_no));
+                 if(error.empty())
+                 {
+                   error.push_back((v[i].line_no));
+                 }
+                 else if(v[i].line_no != error.back()){
+                     error.push_back((v[i].line_no));
+                 }
+                 if(add ->value == "\0"){
+                     i--;
+                 }
                  add = add->parent;
              }
          }
